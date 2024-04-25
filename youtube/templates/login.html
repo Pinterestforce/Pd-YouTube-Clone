@@ -1,0 +1,50 @@
+{% extends "parent.html" %}
+
+{% block title %}
+Log into your Account
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/static/css/login.css">
+<!-- <div class="container"> -->
+  <div class="view full-page-intro img-fluid" style="background-image: url('static/image/abstract.jpg'); background-repeat: no-repeat; background-size: cover; background-position:center; width:auto; height:700px; margin-left: 0rem">
+    <!-- Mask & flexbox options-->
+  <div class="mask rgba-black-light d-flex">
+    <!-- Content -->
+      <div class="container">
+        <!--Grid row-->
+        <div class="basic-content row wow fadeIn justify-content-center">
+          <div class="col-md-6 col-xl-5 mb-4">
+            <div class="register-form">
+              <div class="form-header">
+                <div class="user-logo"></div>
+                <div class="title">SIGN IN</div>
+              </div>
+              <div class="form-container">
+
+              <form  action="login" method="POST" role="form">
+                {% csrf_token %}
+                  <div class="form-element">
+                    <label class="fa fa-user" for="signup-username"></label>
+                    {{ form.username }}
+                  </div>
+
+                  <div class="form-element">
+                    <label class="fa fa-key" for="signup-password"></label>
+                    {{ form.password }}
+                  </div>
+                  <div class="form-element">
+                    <button>Sign In</button>
+                  </div>
+                  </form>
+                  </div>
+                </div>
+              <!-- </form> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+{% endblock %}

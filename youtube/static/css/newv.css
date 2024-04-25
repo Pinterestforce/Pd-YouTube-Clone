@@ -1,0 +1,10 @@
+.img-fluid
+{
+	background:url("/static/image/i4.jpg") center no-repeat; 
+	background-size: cover; 
+	background-position:center; 
+	margin-left: 0rem;
+	position: relative;
+	max-width: 100%;
+	height: auto;
+}

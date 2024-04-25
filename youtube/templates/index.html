@@ -1,0 +1,34 @@
+{% extends "parent.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+{% for video in most_recent_videos %}
+      
+<div class="col-lg-3 col-md-6 col-sm-12 my-2">
+    <div class="card shadow h-100 py-2 col-md-12">
+        <div class="row">
+            <div class="col-md-12 justify-content-center">
+                <a href="/video/{{ video.id }}">
+                    <img class="img-fluid rounded mb-3 mb-md-0 " src="/media/{{video.thumbnail_image}} " alt="">
+                </a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 my-2">
+                <h5>{{ video.title }}</h5>
+                <p>{{ video.description }}</p>
+                <p style="font-size: 12px; color:gray;"><i>Uploaded by {{ video.user }} on {{ video.datetime }} </i></p>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- <hr> -->
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "parent.html" %}
+
+{% block title %}
+Video
+{% endblock %}
+
+
+{% block body %}
+<div class="view full-page-intro img-fluid" style="background-image: url('/static/image/i1.jpg');background-repeat: no-repeat; background-size: cover; background-position:center; width:auto; height:700px; margin-left: 0rem">
+<center>
+
+<h2><b>{{ video.title }}</b></h2>
+<video class="video-fluid z-depth-1" width="450" height="290" loop controls muted>
+  <source src="{{ video.path }}" type="video/mp4" />
+</video>
+
+<p>{{ video.description }}&nbsp;&nbsp;
+{% if form %}
+{% if is_favourite %}
+<a href="{% url 'favourite_video' video.id %}"><i class="fas fa-thumbs-up fa-2x"></i></a>
+{% else %}
+<a href="{% url 'favourite_video' video.id %}"><i class="far fa-thumbs-up fa-2x"></i></a>
+{% endif %}
+{% endif %}
+</p>
+
+<h3><i>Comments</i></h3>
+{% if form %}
+<form action="/comment" method="POST">
+    {% csrf_token %}
+    <p><b>Text: &nbsp;</b>{{ form.text }}</p><br>
+    <input type='hidden' name='video' value='{{ video.id }}'>
+    <button type="submit" class="btn btn-outline-dark">Post Comment!</button>
+</form>
+{% endif %}
+
+{% for comment in comments %}
+<p><br>
+<b>{{ comment.user }}</b> posted on: {{ comment.datetime }} <br>
+<i>{{ comment.text }}</i>
+</p>
+{% endfor %}
+
+</center>
+</div>
+
+{% endblock %}

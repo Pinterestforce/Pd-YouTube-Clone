@@ -1,0 +1,32 @@
+{% extends 'parent.html' %}
+
+{% block title %}
+Youtube Video {{yt.id}}
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<center>
+{% for i in ytvideos %}
+
+<div class="embed-responsive embed-responsive-16by9 col-8">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/{{i.videolink}}" frameborder="1" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+{% endfor %}
+
+<br><br>
+<table>
+<tr>
+<td>
+{% if is_favourite %}
+<a href="{% url 'favourite_ytvideo' yt.id %}"><i class="fas fa-thumbs-up fa-3x"></i></a>
+{% else %}
+<a href="{% url 'favourite_ytvideo' yt.id %}"><i class="far fa-thumbs-up fa-3x"></i></a>
+{% endif %}</td>
+<td>&nbsp;&nbsp;&nbsp;<a class="btn btn-outline-danger btn-lg" href='/youtube/' role="button">Back</a></td>
+</tr>
+</table>
+</center>
+
+{% endblock %}

@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<title>{% block title %}{% endblock %} - YouTube Clone</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+#myBtn 
+{
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+#myBtn:hover
+{
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+</style>
+</head>
+
+<body>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Back To Top</button> 
+
+<!-- <div class="container mt-2"> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-2">
+
+<img src="/static/image/logo3.png" style="height:70px;">
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/home/' %} active {% endif %}" href="/home/">Home
+      <span class="sr-only">(current)</span>
+      </a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/youtube/' %}  active {% endif %}" href="/youtube/">Youtube Video</a>
+    </li>
+    
+    {% if user.is_authenticated %}
+      {% if channel %}
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/new_video' %} active {% endif %}" href="/new_video">Upload Video</a>
+      </li>
+        
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/home/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome {{ user }}</a>
+        
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/{{ user }}/channel">{{ channel.channel_name }}</a>
+        </div>
+      </li>
+
+        
+      {% else %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/home/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome {{ user }}</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/createchannel">Create Channel</a>
+          </div>
+        </li>
+      {% endif %}
+        
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/home/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Favourite List</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item {% if request.path == '/ytvideo_favourite_list/' %}  active {% endif %}" href="/ytvideo_favourite_list/">Youtube Favourite</a>
+          <a class="dropdown-item {% if request.path == '/video_favourite_list/' %}  active {% endif %}" href="/video_favourite_list/">Home Favourite</a>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Log Out!</a>
+      </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/login' %} active {% endif %}" href="/login">Sign In</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/register' %} active {% endif %}" href="/register">Sign Up</a>
+    </li>
+    {% endif %}
+  </ul>
+  
+  <form class="form-inline my-2 my-lg-0" action="/search/">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="vname">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</div>
+</nav>
+
+<script>
+
+//Get the button:
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() 
+{
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) 
+  {
+    mybutton.style.display = "block";
+  }
+  else
+  {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() 
+{
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+} 
+</script>
+
+<div class="fluid mt-4">
+  {% block body %}
+  {% endblock %}
+</div>
+
+<footer>
+{% comment %} <div style="background-color: #222f3e;"> {% endcomment %}
+<hr>
+<p style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&copy; 2020-2021 | Designed By Rishahb</p>
+<hr>
+</div>
+</footer>
+
+<!-- Optional JavaScript jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+</script>
+<script src="https://kit.fontawesome.com/3f5479702a.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "parent.html" %}
+
+{% block title %}
+Upload Video
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="static/css/newv.css">
+
+<div class="img-fluid">
+<br><br><br>
+<table cellpadding="5" align="center">
+<form action="new_video" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+    <tr><td>Title:</td><td>{{form.title}}</td></tr>
+    <tr><td>Description:</td><td>{{form.description}}</td></tr>
+    <tr><td>File:</td><td>{{form.file}}</td></tr>
+    <tr><td>Thumbnail:</td><td>{{form.thumbnail_image}}</td></tr>
+    <tr><td><br><button type="submit" class="btn btn-outline-primary" >Upload Video</button></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+</form>
+</table>
+</div>
+</div>
+
+{% endblock %}
