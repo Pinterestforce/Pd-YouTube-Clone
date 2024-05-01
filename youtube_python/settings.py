@@ -14,7 +14,8 @@ SECRET_KEY = '067dowgvbbhxh670i8#gox(_pq37*yj(wjt)9yg@+dz-)oggpr'
 DEBUG = True
 
 ALLOWED_HOSTS = ['6b21-59-145-165-202.ngrok-free.app',
-                 'localhost:8000']
+                 'localhost:8000',
+                 'youtube-clone-kyqx.onrender.com']
 
 # Application definition
 
