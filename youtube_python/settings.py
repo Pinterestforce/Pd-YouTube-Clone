@@ -1,5 +1,5 @@
 import os
-
+import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -14,7 +14,8 @@ SECRET_KEY = '067dowgvbbhxh670i8#gox(_pq37*yj(wjt)9yg@+dz-)oggpr'
 DEBUG = True
 
 ALLOWED_HOSTS = ['6b21-59-145-165-202.ngrok-free.app',
-                 'localhost:8000']
+                 'localhost:8000',
+                 '127.0.0.1']
 
 # Application definition
 
@@ -72,6 +73,8 @@ DATABASES = {
     }
 }
 
+DATABASES["default"]=dj_database_url.parse("postgres://youtube_4ver_user:x5i5upzuQ6JWC6L1KHqCUDW5fwhh7Kgv@dpg-coov3vgl5elc738trbgg-a.oregon-postgres.render.com/youtube_4ver")
+# postgres://youtube_4ver_user:x5i5upzuQ6JWC6L1KHqCUDW5fwhh7Kgv@dpg-coov3vgl5elc738trbgg-a.oregon-postgres.render.com/youtube_4ver
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
